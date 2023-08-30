@@ -8,7 +8,8 @@ const GuestLayout = () => {
         <Header />
         <div className="flex flex-wrap  items-center mx-auto max-w-screen-xl">
           <Breadcrumbs>
-            <Breadcrumbs.Base />
+            <Breadcrumbs.Root />
+            {/*<Breadcrumbs.CrumbItem  > </Breadcrumbs.CrumbItem>*/}
             <Breadcrumbs.CrumbList />
           </Breadcrumbs>
         </div>

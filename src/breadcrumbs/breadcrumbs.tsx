@@ -14,9 +14,11 @@ export default function Breadcrumbs({ children }) {
   return <BreadcrumbProvider value={{}}>{children}</BreadcrumbProvider>;
 }
 
-const Base = () => {
+const Root = ({ children }) => {
   let { pathname } = useLocation();
-  return (
+  return children ? (
+    children
+  ) : (
     <li className={`${pathname === "/" ? "hidden" : "block"}`}>
       <Link to="/" className="text-gray-400 hover:text-gray-500">
         <svg
@@ -47,7 +49,7 @@ const List = ({ crumbs }) => {
           return isArray ? (
             <List crumbs={crumb} key={index} />
           ) : (
-            <CrumbItem index={index} key={index}>
+            <CrumbItem index={index} key={index} icon>
               {crumb}
             </CrumbItem>
           );
@@ -69,23 +71,26 @@ const CrumbList = () => {
 
   return <List crumbs={crumbs} />;
 };
-const CrumbItem = ({ children }) => {
+const CrumbItem = ({ children, icon }) => {
+ 
   return (
-    <li className="only:font-normal last:font-bold">
+    <li className="only:font-normal last:font-bold list-none">
       <div className="flex items-center">
-        <svg
-          className="h-5 w-5 flex-shrink-0 text-gray-300"
-          fill="currentColor"
-          viewBox="0 0 20 20"
-          aria-hidden="true"
-        >
-          <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z" />
-        </svg>
+        {icon ? (
+          <svg
+            className="h-5 w-5 flex-shrink-0 text-gray-300"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            aria-hidden="true"
+          >
+            <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z" />
+          </svg>
+        ) : null}
         {children}
       </div>
     </li>
   );
 };
-Breadcrumbs.Base = Base;
+Breadcrumbs.Root = Root;
 Breadcrumbs.CrumbList = CrumbList;
 Breadcrumbs.CrumbItem = CrumbItem;
