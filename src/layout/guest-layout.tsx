@@ -4,11 +4,17 @@ import { Breadcrumbs } from "../breadcrumbs";
 const GuestLayout = () => {
   return (
     <>
-      <Header />
-       <div className="w-full container mx-auto bg-gray-50 shadow">
-        <Breadcrumbs />
+      <div className="    mx-auto max-w-screen-xl">
+        <Header />
+        <div className="flex flex-wrap  items-center mx-auto max-w-screen-xl">
+          <Breadcrumbs>
+            <Breadcrumbs.Base />
+            <Breadcrumbs.CrumbList />
+          </Breadcrumbs>
+        </div>
+        <div className="w-full h-10" />
+        <Outlet />
       </div>
-      <Outlet />
     </>
   );
 };
